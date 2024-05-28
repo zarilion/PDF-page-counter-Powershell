@@ -51,6 +51,7 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
 
 "`nTotal Number of pages: {0} in {1} files" -f $Total,$Files | Out-File -FilePath $outputFile -Append
     }
+    #Finished pop up
     $wshell = New-Object -ComObject Wscript.Shell
 
     $wshell.Popup("Finished!",0,"PDFPCP v1",0x1)
