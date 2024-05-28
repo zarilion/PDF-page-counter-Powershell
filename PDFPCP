@@ -2,7 +2,7 @@
 $folder = Add-Type -AssemblyName System.Windows.Forms
 $FolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog -Property @{
     RootFolder      = "Desktop"
-    Description     = "PDF Page Counter Powershell"   
+    Description     = "PDF Page Counter Powershell - Pick a folder"   
 }
     if($FolderBrowser.ShowDialog() -eq "OK")
     {
