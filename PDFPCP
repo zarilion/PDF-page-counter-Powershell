@@ -8,10 +8,13 @@ $FolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog -Property @
     {
         $folder += $FolderBrowser.SelectedPath
     }
+
 #Get name from selected folder for name of report
 $name = Get-Item $FolderBrowser.SelectedPath
+
 #Get date for name of report
 $date = Get-Date -Format 'dd-MM-yyyy'
+
 #Question box YesNo for subfolders    
 $answer = [System.Windows.Forms.MessageBox]::Show("Subfolders?", "PDFPCP", "YesNo", "Question")
     if($answer -eq "Yes")
@@ -51,6 +54,7 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
 
 "`nTotal Number of pages: {0} in {1} files" -f $Total,$Files | Out-File -FilePath $outputFile -Append
     }
+    
     #Finished pop up
     $wshell = New-Object -ComObject Wscript.Shell
 
