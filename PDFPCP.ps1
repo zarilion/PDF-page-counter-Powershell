@@ -17,7 +17,7 @@ $answer = [System.Windows.Forms.MessageBox]::Show("Subfolders?", "PDFPCP", "YesN
 $Total = $Files = 0
 
 foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
-    $Pages = (X:\PDF_TOOLS\pdfinfo.exe $File.FullName | Select-String -Pattern '(?<=Pages:\s*)\d+').Matches.Value
+    $Pages = (.\pdfinfo $File.FullName | Select-String -Pattern '(?<=Pages:\s*)\d+').Matches.Value
     $Total += $Pages
     $Files++ 
     [PSCustomObject]@{
@@ -36,7 +36,7 @@ foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
 $Total = $Files = 0
 
 foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
-    $Pages = (X:\PDF_TOOLS\pdfinfo.exe $File.FullName | Select-String -Pattern '(?<=Pages:\s*)\d+').Matches.Value
+    $Pages = (.\pdfinfo $File.FullName | Select-String -Pattern '(?<=Pages:\s*)\d+').Matches.Value
     $Total += $Pages
     $Files++ 
     [PSCustomObject]@{
