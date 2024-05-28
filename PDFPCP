@@ -8,12 +8,14 @@ $FolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog -Property @
     {
         $folder += $FolderBrowser.SelectedPath
     }
+#Get name from selected folder for name of report
+$name = Get-Item $FolderBrowser.SelectedPath
 #Question box YesNo for subfolders    
 $answer = [System.Windows.Forms.MessageBox]::Show("Subfolders?", "PDFPCP", "YesNo", "Question")
     if($answer -eq "Yes")
     {
         #Script for counting pages and making a report that goes in the chosen folder if subfolders is selected
-        $outputFile = Join-Path -Path $folder -ChildPath "Rapport.txt"
+        $outputFile = Join-Path -Path $folder -ChildPath "$($name.BaseName)_report.txt"
 $Total = $Files = 0
 
 foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
@@ -32,7 +34,7 @@ foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
     if($answer -eq "No")
     {
         #Script for counting pages and making a report that goes in the chosen folder if subfolders is not selected
-        $outputFile = Join-Path -Path $folder -ChildPath "Rapport.txt"
+        $outputFile = Join-Path -Path $folder -ChildPath "$($name.BaseName)_report.txt"
 $Total = $Files = 0
 
 foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
