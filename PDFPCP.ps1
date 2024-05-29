@@ -60,4 +60,7 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
     $wshell = New-Object -ComObject Wscript.Shell
 
     $wshell.Popup("Finished!",0,"PDFPCP v1",0x1)
+
+#Opens selected folder in Explorer window
+Invoke-Item $name
     
