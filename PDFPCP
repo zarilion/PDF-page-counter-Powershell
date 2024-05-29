@@ -1,13 +1,14 @@
 #Dialog box for folder selection
-$folder = Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Windows.Forms
 $FolderBrowser = New-Object System.Windows.Forms.FolderBrowserDialog -Property @{
     RootFolder      = "Desktop"
     Description     = "PDF Page Counter Powershell - Pick a folder"   
 }
     if($FolderBrowser.ShowDialog() -eq "OK")
     {
-        $folder += $FolderBrowser.SelectedPath
+        $folder = $FolderBrowser.SelectedPath
     }
+    else { break }
 
 #Get name from selected folder for name of report
 $name = Get-Item $FolderBrowser.SelectedPath
