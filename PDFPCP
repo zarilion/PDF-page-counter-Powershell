@@ -32,7 +32,9 @@ foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
         PdfFile = $File.Name
         Pages   = $Pages
     }
+    #Write process to terminal
     Write-Host $object
+    #Make CSV file
     $csvData = $object | ConvertTo-Csv -Delimiter ';' -NoTypeInformation
     $csvData | Select-Object -Skip 1 | Out-File -FilePath $outputFile -Append
 }
@@ -54,7 +56,9 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
         PdfFile = $File.Name
         Pages   = $Pages
     }
+    #Write process to terminal
     Write-Host $object
+    #Make CSV file
     $csvData = $object | ConvertTo-Csv -Delimiter ';' -NoTypeInformation
     $csvData | Select-Object -Skip 1 | Out-File -FilePath $outputFile -Append
 }
@@ -65,7 +69,7 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
     #Finished pop up
     $wshell = New-Object -ComObject Wscript.Shell
 
-    $wshell.Popup("Finished!",0,"PDFPCP v1",0x1)
+    $wshell.Popup("Finished!",0,"PDFPCP",0x1)
 
 #Opens selected folder in Explorer window
 Invoke-Item $name
