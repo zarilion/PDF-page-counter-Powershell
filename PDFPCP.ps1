@@ -32,6 +32,7 @@ foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
         PdfFile = $File.Name
         Pages   = $Pages
     }
+    Write-Host $object
     $csvData = $object | ConvertTo-Csv -Delimiter ';' -NoTypeInformation
     $csvData | Select-Object -Skip 1 | Out-File -FilePath $outputFile -Append
 }
@@ -53,6 +54,7 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
         PdfFile = $File.Name
         Pages   = $Pages
     }
+    Write-Host $object
     $csvData = $object | ConvertTo-Csv -Delimiter ';' -NoTypeInformation
     $csvData | Select-Object -Skip 1 | Out-File -FilePath $outputFile -Append
 }
