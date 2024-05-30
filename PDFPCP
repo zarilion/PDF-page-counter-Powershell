@@ -28,10 +28,12 @@ foreach($File in (Get-ChildItem -Path $folder -Recurse -Filter *.pdf)){
     $Pages = (.\pdfinfo $File.FullName | Select-String -Pattern '(?<=Pages:\s*)\d+').Matches.Value
     $Total += $Pages
     $Files++ 
-    [PSCustomObject]@{
+    $object = [PSCustomObject]@{
         PdfFile = $File.Name
         Pages   = $Pages
-    } | Out-File -FilePath $outputFile -Append
+    }
+    $csvData = $object | ConvertTo-Csv -Delimiter ';' -NoTypeInformation
+    $csvData | Select-Object -Skip 1 | Out-File -FilePath $outputFile -Append
 }
 
 "`nTotal Number of pages: {0} in {1} files" -f $Total,$Files | Out-File -FilePath $outputFile -Append
@@ -47,10 +49,12 @@ foreach($File in (Get-ChildItem -Path $folder -Filter *.pdf)){
     $Pages = (.\pdfinfo $File.FullName | Select-String -Pattern '(?<=Pages:\s*)\d+').Matches.Value
     $Total += $Pages
     $Files++ 
-    [PSCustomObject]@{
+    $object = [PSCustomObject]@{
         PdfFile = $File.Name
         Pages   = $Pages
-    } | Out-File -FilePath $outputFile -Append
+    }
+    $csvData = $object | ConvertTo-Csv -Delimiter ';' -NoTypeInformation
+    $csvData | Select-Object -Skip 1 | Out-File -FilePath $outputFile -Append
 }
 
 "`nTotal Number of pages: {0} in {1} files" -f $Total,$Files | Out-File -FilePath $outputFile -Append
